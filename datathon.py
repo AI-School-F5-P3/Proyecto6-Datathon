@@ -14,6 +14,19 @@ if response.status_code == 200:
 else:
     print(f"Error en la solicitud: {response.status_code}")
 
+
+# Verificar cuántos datos nulos, vacíos o en cero hay en cada columna
+null_counts = df.isnull().sum()  # Contar los valores nulos
+zero_counts = (df == 0).sum()    # Contar los valores que son cero
+
+# Combinar las dos series en un DataFrame para mostrar los resultados
+null_and_zero_counts = pd.DataFrame({
+    'Null Counts': null_counts,
+    'Zero Counts': zero_counts
+})
+
+print(null_and_zero_counts)
+
 # 3. Convertir la columna 'date' en un formato de fecha
 df['date'] = pd.to_datetime(df['date'], format='%Y%m%d')
 
